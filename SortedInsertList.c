@@ -1,7 +1,5 @@
-// Online C++ compiler to run C++ program online
 #include <iostream>
 using namespace std;
-//SortedInsertedLinkedList
 template <typename T>
 struct NODE {
    NODE* next = nullptr;
@@ -9,8 +7,6 @@ struct NODE {
 };
 template <typename T>
 using NodePtr = NODE<T>; 
-
-
 
 template <class T>
 NodePtr<T>* SortedInsert(NodePtr<T>*head, T data)
