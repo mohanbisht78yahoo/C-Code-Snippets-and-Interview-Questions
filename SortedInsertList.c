@@ -1,6 +1,7 @@
-/* Sortd insert list */
+// Online C++ compiler to run C++ program online
 #include <iostream>
 using namespace std;
+//SortedInsertedLinkedList
 template <typename T>
 struct NODE {
    NODE* next = nullptr;
@@ -8,6 +9,8 @@ struct NODE {
 };
 template <typename T>
 using NodePtr = NODE<T>; 
+
+
 
 template <class T>
 NodePtr<T>* SortedInsert(NodePtr<T>*head, T data)
@@ -46,15 +49,35 @@ void print_list(const NodePtr<T>* head)
         cout << head->data << " ";
         head = head->next;
     }
+    cout << endl;
 }
 
+template <typename T>
+void print_middle(const NodePtr<T>* head)
+{
+    const NodePtr<T>* fast = head;
+    const NodePtr<T>* slow = head;
+    
+    if(head == nullptr) {
+        cout << "empty list" << endl;
+        return;
+    }
+    while(fast && fast->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    cout << "middle val " << slow->data << endl;
+}
 
 int main() {
+
     NodePtr<int>* head = nullptr;
     head = SortedInsert(head, 4);
     head = SortedInsert(head, 1);
+    head = SortedInsert(head, 14);
     head = SortedInsert(head, 7);
     print_list(head);
+    print_middle(head);
 
     return 0;
 }
