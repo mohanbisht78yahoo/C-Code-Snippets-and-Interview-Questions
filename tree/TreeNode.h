@@ -55,3 +55,16 @@ bool is_sametree(NodePtr<T> root1, NodePtr<T> root2)
         is_sametree(root1->right, root2->right);
 }
 
+//add node
+template <typename T>
+NodePtr<T> sorted_insert(NodePtr<T> root, T val ) 
+{    
+    NodePtr<T> tmp = new NODE<T>(val);
+    if(root == NULL) return tmp;    
+    if(root->data > val)
+       root->left = sorted_insert<T>(root->left, val);
+    else 
+       root->right = sorted_insert<T>(root->right, val);
+
+    return root;
+}
