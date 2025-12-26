@@ -20,6 +20,15 @@ void print_inorder(NodePtr<T> root)
 }
 
 template <typename T>
+void print_preorder(NodePtr<T> root)
+{
+    if(!root) return;
+    cout<< root->data << " ";
+    print_preorder(root->left);
+    print_preorder(root->right);
+}
+
+template <typename T>
 int height(NodePtr<T> root) {
     if(root == nullptr) return 0;
     return 1 + max(height(root->left), height(root->right));
