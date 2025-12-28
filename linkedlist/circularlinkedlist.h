@@ -5,6 +5,19 @@ typedef struct NODE
   T data;
 }Node;
 
-void print_list()
+template <typename T>
+using NodePtr = Node<T>*;
+
+template <typename T>
+void print_list(NodePtr<T> * head)
 {
+  if(!head) return;
+
+  NodePtr<T>* tmp = head;
+  do 
+  {
+    cout << tmp->data << " ";
+    tmp = tmp->next;
+  } while(tmp != head);
 }
+
