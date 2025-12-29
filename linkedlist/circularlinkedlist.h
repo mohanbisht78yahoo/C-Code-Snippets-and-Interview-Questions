@@ -9,15 +9,11 @@ struct NODE
 {
   NODE<T>* next = nullptr;
   std::list<T> dataList;
-  //T data;
 
   NODE(T val) 
   { 
-    //data = val;
     dataList.push_back(val);
   }
-
-  friend std::ostream& operator<< (std::ostream& stream, const NODE<T>& node);
 
   void print()
   {
@@ -31,15 +27,17 @@ struct NODE
     else cout << " " << dataList.front() << ", ";
   }
 
-  ~NODE() { cout << endl << "destroying: " << dataList.front();}
+  ~NODE() { /*cout << endl << "destroying: " << dataList.front();*/}
 };
 
+/*
 template <typename T>
 std::ostream& operator<<(std::ostream& stream,
                      const NODE<T>& node) {
     node.print(stream); // Assuming you define print for matrix
     return stream;
  }
+*/
 
 template <typename T>
 using NodePtr = NODE<T>*;
@@ -103,10 +101,15 @@ public:
             return currentNode != iterator.currentNode;
         }
         
+        /*std::list<T> operator*()
+        {
+            return currentNode->dataList;
+        }*/
         T operator*()
         {
             return currentNode->dataList.front();
         }
+
     };
 
 
@@ -147,7 +150,7 @@ public:
 
     }
 
-    void push_back(T data)
+    void push_front(T data) 
     {
         if(head == nullptr) {
             head = new NODE<T>(data);
@@ -163,6 +166,44 @@ public:
                 return;
             }
 
+            tail = tail->next;
+            count++;
+        }
+
+        if(tail->dataList.front() == data) {
+            tail->dataList.push_back(data);
+            return;
+        }
+
+        if(count <= Capacity) {
+            NodePtr<T> newNode = new NODE<T>(data);
+            newNode->next = head;  
+            tail->next = newNode;
+            head = newNode;
+        }
+        /* we have reached the capacity */
+        else {
+            ///head->dataL = data;
+            head->dataList.clear(); head->dataList.push_back(data);
+            head = head->next;
+        }
+    }
+
+    void push_back(T data)
+    {
+        if(head == nullptr) {
+            head = new NODE<T>(data);
+            head->next = head;
+            return;
+        }
+
+        int count = 2;
+        NodePtr<T> tail = head;
+        while(tail->next != head) {
+            if(tail->dataList.front() == data) {
+                tail->dataList.push_back(data);
+                return;
+            }
             tail = tail->next;
             count++;
         }
@@ -203,11 +244,18 @@ public:
 int main()
 {
     CircularList<int, 5> circularList;
-    for(int i=1;i<10;i++) {
-        circularList.push_back((uint)i);
-        if(i%2) circularList.push_back((uint)i);
+    for(int i=1;i<=5;i++) {
+        circularList.push_front((uint)i);
     }
 
+    cout << "push_front list: "; 
+    circularList.print();
+    circularList.clear();
+
+    for(int i=1;i<=5;i++) {
+        circularList.push_back((uint)i);
+    }
+    cout << "push_back list:  ";
     circularList.print();
 
     for(auto itr = circularList.begin(); itr != circularList.end(); itr++)
