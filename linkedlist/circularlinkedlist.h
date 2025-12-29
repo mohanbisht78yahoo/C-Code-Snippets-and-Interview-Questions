@@ -150,6 +150,41 @@ public:
 
     }
 
+    void push(T data, bool front = false) 
+    {
+        if(head == nullptr) {
+            head = new NODE<T>(data);
+            head->next = head;
+            //length = 1;
+            return;
+        }
+
+        NodePtr<T> newNode = new NODE<T>(data);
+        /*if(length >= capacity)
+        {
+            cout << "current head:  " << head->dataList.front()  << endl;
+            newNode->next = head->next;
+            head->next = newNode;
+            std::swap(head->dataList, newNode->dataList);
+            return;
+        }*/
+
+        if(front) { /* push to front */
+            newNode->next = head->next;
+            head->next = newNode;
+            std::swap(head->dataList, newNode->dataList);
+        }
+        else // push to the back
+        {
+            newNode->next = head->next;
+            head->next = newNode;
+            std::swap(head->dataList, newNode->dataList);
+            head = newNode;
+            /* find the tail */
+        }
+        //length ++;
+    }
+
     void push_front(T data) 
     {
         if(head == nullptr) {
