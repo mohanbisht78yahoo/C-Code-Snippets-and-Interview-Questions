@@ -29,6 +29,26 @@ void print_preorder(NodePtr<T> root)
 }
 
 template <typename T>
+void print_levelorder(NodePtr<T> root)
+{
+    if(!root) {cout << "root is null, nothing to print" << endl; return;}
+    std::queue< NodePtr<T> > queue;
+    queue.push(root); /* push the root element to the queue */
+    int level = 1;
+    while(!queue.empty() {
+        cout << endl << "level " << level << endl;
+        for(int i=0;i<queue.size();i++) {
+            auto node = queue.front();
+            cout << node->data << " ";
+            if(node->left) { /*cout << "left: " << node->left->data; */ queue.push(node->left); }
+            if(node->right) { /* cout << "right " << node->right->data; */ queue.push(node->right); }
+            queue.pop();
+        }
+        level++;
+    }
+}
+
+template <typename T>
 int height(NodePtr<T> root) {
     if(root == nullptr) return 0;
     return 1 + max(height(root->left), height(root->right));
