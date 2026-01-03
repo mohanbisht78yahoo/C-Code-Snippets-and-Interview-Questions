@@ -75,7 +75,27 @@ int balanced_height_tree(NodePtr<T> root) {
    if(lheight == -1 || rheight == -1) return -1;
    /* if height difference greater than 1, it is not a balanced binary tree */
    if( abs(lheight - rheight) > 1) return -1;
-   return max(height(root->left), height(root->right)) + 1;
+   return max(lheight, rheight) + 1;
+}
+
+
+/* longest path also called diameter of binary tree */
+template <typename T>
+int longest_path_height((NodePtr<T> root)
+{
+   int maxH = 0;
+   max_height(root, &maxH);
+   return maxH;
+}
+
+/* longest path length, diameter of a tree */
+template <typename T>
+int max_height(NodePtr<T> root, int& maxH) {
+   if(root == nullptr) return 0;
+   auto lheight = max_height(root->left, maxH);
+   auto rheight = max_height(root->right, maxH);
+   maxH = max(maxH, lheight + rheight);
+   return 1 + max(lheight, rheight);
 }
 
 template <typename T>
