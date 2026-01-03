@@ -54,6 +54,18 @@ int height(NodePtr<T> root) {
     return 1 + max(height(root->left), height(root->right));
 }
 
+tempate <typename T>
+bool is_balancedtree(NodePtr<T> root) {
+   if(!root) return true;
+
+   lheight = height(root->left);
+   rheight = height(root->right);
+   if(lheight != rheight) return false;
+   
+   return ( is_balancedtree(root->left) &&
+       is_balancedtree(root->right) );  
+}
+
 template <typename T>
 bool is_subtree(NodePtr<T> root1, NodePtr<T> root2) {
     
