@@ -66,6 +66,18 @@ bool is_balancedtree(NodePtr<T> root) {
        is_balancedtree(root->right) );  
 }
 
+/* modified but this is better than is_balancedtree version */
+template <typename T>
+int balanced_height_tree(NodePtr<T> root) {
+   if(root == nullptr) return 0;
+   auto lheight = balanced_height_tree(root->left);
+   auto rheight = balanced_height_tree(root->right);
+   if(lheight == -1 || rheight == -1) return -1;
+   /* if height difference greater than 1, it is not a balanced binary tree */
+   if( abs(lheight - rheight) > 1) return -1;
+   return max(height(root->left), height(root->right)) + 1;
+}
+
 template <typename T>
 bool is_subtree(NodePtr<T> root1, NodePtr<T> root2) {
     
