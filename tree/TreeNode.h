@@ -68,6 +68,12 @@ int height(NodePtr<T> root) {
     return 1 + max(height(root->left), height(root->right));
 }
 
+template <typename T>
+int size(NodePtr<T> root) {
+   if(root == nullptr) return 0;
+   return (1 + size(root->left) + size(root->right));
+}
+
 tempate <typename T>
 bool is_balancedtree(NodePtr<T> root) {
    if(!root) return true;
