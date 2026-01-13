@@ -68,10 +68,36 @@ int height(NodePtr<T> root) {
     return 1 + max(height(root->left), height(root->right));
 }
 
+/* For iterative approach use level order traversal with a counter
+increment the counter whenever we add nodes to the queue */
 template <typename T>
 int size(NodePtr<T> root) {
    if(root == nullptr) return 0;
    return (1 + size(root->left) + size(root->right));
+}
+
+tempate <typename T>
+int width(NodePtr<T> root) {
+   if(!root) { return 0;}
+   int width=0;
+   std::queue< NodePtr<T> > queue;
+   queue.push(root); /* push the root element to the queue */
+   while(!queue.empty() {
+      width = queue.size() > width : queue.size() : width;
+      for(int i=0;i<queue.size();i++) {
+         auto node = queue.front();
+         if(node->left) { queue.push(node->left); }
+         if(node->right) { queue.push(node->right); }
+         queue.pop();
+      } 
+   }
+   return width;
+}
+
+template <>
+int maxValue(NodePtr<int> root) {
+   if(root == nullptr) return INT_MIN;
+   return max(root->data, max(maxValue(root->left), maxValue(root->right)));  
 }
 
 tempate <typename T>
