@@ -49,6 +49,20 @@ void print_levelorder(NodePtr<T> root)
 }
 
 template <typename T>
+void printkthnode(NodePtr<T> root, int k)
+{
+  if(!root) return;
+   
+  if(k == 0)  {
+     cout << root->data ;
+  }
+  else { 
+    printkthnode(root->left, k-1);
+    printkthnode(root->right, k-1);
+  }
+}
+
+template <typename T>
 int height(NodePtr<T> root) {
     if(root == nullptr) return 0;
     return 1 + max(height(root->left), height(root->right));
