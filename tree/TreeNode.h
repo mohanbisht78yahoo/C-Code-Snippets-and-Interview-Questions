@@ -23,6 +23,7 @@ void print_inorder(NodePtr<T> root)
 template <typename T>
 void iterate_inorder(NodePtr<T> root)
 {
+   if(!root) return;
    std::stack<NodePtr<T>> st;
    NodePtr<T> curr = root;
    while(curr != nullptr || !st.empty()) {
@@ -47,6 +48,24 @@ void print_preorder(NodePtr<T> root)
     print_preorder(root->left);
     print_preorder(root->right);
 }
+
+/* use stack LIFO data struct */
+template <typename T>
+void iterate_preorder(NodePtr<T> root)
+{
+   if (!root) return;
+   std::stack<NodePtr<T>> st;
+   NodePtr<T> curr = root;
+   st.push(root);
+   while(!st.empty()) {
+      /* get the one at the top */
+      curr = s.top(); s.pop();
+      cout << curr->data << " ";
+      if (curr->right) st.push(curr->right); /* remember move right before left as we use stack here */ 
+      if (curr->left) st.push(curr->left);
+   }
+}
+
 
 template <typename T>
 void print_levelorder(NodePtr<T> root)
