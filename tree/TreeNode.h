@@ -19,6 +19,26 @@ void print_inorder(NodePtr<T> root)
     print_inorder(root->right);
 }
 
+/* use stack LIFO data struct */
+template <typename T>
+void iterate_inorder(NodePtr<T> root)
+{
+   std::stack<NodePtr<T>> st;
+   NodePtr<T> curr = root;
+   while(curr != nullptr || !st.empty()) {
+      /* keep going to left; */
+      while(curr != nullptr) {
+         st.push(curr);
+         curr=curr->left;
+      }
+      /* get the one at the top */
+      curr = s.top(); s.pop();
+      cout << curr->data << " ";
+      curr = curr->right;
+   }
+}
+
+
 template <typename T>
 void print_preorder(NodePtr<T> root)
 {
